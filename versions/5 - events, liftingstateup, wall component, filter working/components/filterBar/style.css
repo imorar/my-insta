@@ -1,0 +1,29 @@
+.insta-filter {
+  padding: 5px;
+  width: 100%;
+  border-radius: 10px;
+
+}
+
+.insta-filter span {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin:10px;
+  background: #fafafa;
+  font-weight: 600;
+}
+
+.insta-filter span.selected {
+  background: #333;
+  color: white;
+}
+
+.insta-filter span:hover {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin:10px;
+}
