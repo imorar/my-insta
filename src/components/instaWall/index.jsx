@@ -5,7 +5,7 @@ import InstaItem from '../instaItem';
 export default class InstaWall extends React.Component {
 	renderItems = () => {
 		return this.props.content.map((item) => (
-			<InstaItem key={item.id} {...item} />
+			<InstaItem key={item.id} {...item} refresh={this.props.reloadData}/>
 		));
 	}
 
