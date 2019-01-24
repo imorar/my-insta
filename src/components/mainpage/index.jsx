@@ -1,15 +1,17 @@
 import React from "react";
 import logo from "../../logo.png";
 import "./style.css";
-import { ApiHost } from '../../config';
+import { ApiHost, FilterType } from '../../config';
 import InstaItem from '../instaItem';
+import FilterBar from '../filterBar';
 
 export default class MainPage extends React.Component {
 	constructor(props){
 		super(props);
 		
 		this.state = {
-			photos: []
+			photos: [],
+			filterType: FilterType.All
 		}
 	}
 
@@ -26,6 +28,14 @@ export default class MainPage extends React.Component {
 		));
 	}
 
+	getFavoritesCounter = () => {
+		return this.state.photos.filter((item) => (item.isFavorite)).length;
+	}
+
+	onFilterChange = (newFilterType) => {
+		this.setState({filterType: newFilterType});
+	}
+
 	render() {
 		return (
 			<div className="App">
@@ -33,6 +43,7 @@ export default class MainPage extends React.Component {
 					<img src={logo} className="App-logo" alt="logo" />
 					<h1>MyInsta</h1>
 				</header>
+				<FilterBar favoriteCounter={this.getFavoritesCounter()} handleFilters={this.onFilterChange} selected={this.state.filterType} />
 				<div className="insta-wall">
 					{this.renderItems()}
 				</div>

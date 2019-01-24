@@ -16,7 +16,7 @@ export default class InstaItem extends React.Component {
 					<FontAwesomeIcon icon={faThumbsUp} size="2x" className="like" />
 					({this.props.likeCounter})
 					<span className="separator" />
-					<FontAwesomeIcon icon={faHeart} size="2x" className={'favorite' + (this.props.isFavortite ? ' selected' : '')} />
+					<FontAwesomeIcon icon={faHeart} size="2x" className={'favorite' + (this.props.isFavorite ? ' selected' : '')} />
 				</div>
 			</div>
 		);
