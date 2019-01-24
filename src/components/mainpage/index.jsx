@@ -1,9 +1,8 @@
 import React from "react";
 import logo from "../../logo.png";
 import "./style.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faHeart } from "@fortawesome/free-solid-svg-icons";
-import { ApiHost } from './../../config';
+import { ApiHost } from '../../config';
+import InstaItem from '../instaItem';
 
 export default class MainPage extends React.Component {
 	constructor(props){
@@ -13,7 +12,7 @@ export default class MainPage extends React.Component {
 			photos: []
 		}
 	}
-	
+
 	componentWillMount() {
 		fetch(ApiHost)
 			.then(response => response.json())
@@ -22,19 +21,8 @@ export default class MainPage extends React.Component {
 
 	renderItems = () => {
 		return this.state.photos.map((item) => (
-			<div className="insta-wall-item">
-				<img
-					className="image-container"
-					alt={item.title}
-					src={item.url}
-				/>
-				<div className="bar-container">
-					<FontAwesomeIcon icon={faThumbsUp} size="2x" className="like" />
-					({item.likes})
-					<span className="separator" />
-					<FontAwesomeIcon icon={faHeart} size="2x" className={'favorite' + (item.isFavortite ? ' selected' : '')} />
-				</div>
-			</div>
+			//<InstaItem id={item.id} url={item.url} title={item.title} isFavorite={item.isFavorite} likeCounter={item.likeCounter} />
+			 <InstaItem key={item.id} {...item} />
 		));
 	}
 
