@@ -3,8 +3,41 @@ import logo from "../../logo.png";
 import "./style.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { ApiHost } from './../../config';
 
 export default class MainPage extends React.Component {
+	constructor(props){
+		super(props);
+		
+		this.state = {
+			photos: []
+		}
+	}
+	
+	componentWillMount() {
+		fetch(ApiHost)
+			.then(response => response.json())
+			.then((result) =>this.setState({photos: result}));
+	}
+
+	renderItems = () => {
+		return this.state.photos.map((item) => (
+			<div className="insta-wall-item">
+				<img
+					className="image-container"
+					alt={item.title}
+					src={item.url}
+				/>
+				<div className="bar-container">
+					<FontAwesomeIcon icon={faThumbsUp} size="2x" className="like" />
+					({item.likes})
+					<span className="separator" />
+					<FontAwesomeIcon icon={faHeart} size="2x" className={'favorite' + (item.isFavortite ? ' selected' : '')} />
+				</div>
+			</div>
+		));
+	}
+
 	render() {
 		return (
 			<div className="App">
@@ -13,84 +46,7 @@ export default class MainPage extends React.Component {
 					<h1>MyInsta</h1>
 				</header>
 				<div className="insta-wall">
-					<div className="insta-wall-item">
-						<img
-							className="image-container"
-							alt=""
-							src="https://media-cdn.tripadvisor.com/media/photo-s/09/92/70/d1/club-hotel-turan-prince.jpg"
-						/>
-						<div className="bar-container">
-							<FontAwesomeIcon icon={faThumbsUp} size="2x" className="like" />
-							{"(5)"}
-							<span className="separator" />
-							<FontAwesomeIcon icon={faHeart} size="2x" className="favorite" />
-						</div>
-					</div>
-					<div className="insta-wall-item">
-						<img
-							className="image-container"
-							alt=""
-							src="https://media-cdn.tripadvisor.com/media/photo-s/09/92/73/8c/mini-zoo.jpg"
-						/>
-						<div className="bar-container">
-							<FontAwesomeIcon icon={faThumbsUp} size="2x" className="like" />
-							{"(5)"}
-							<span className="separator" />
-							<FontAwesomeIcon icon={faHeart} size="2x" className="favorite" />
-						</div>
-					</div>
-					<div className="insta-wall-item">
-						<img
-							className="image-container"
-							alt=""
-							src="https://media-cdn.tripadvisor.com/media/photo-s/09/92/84/5a/aquapark.jpg"
-						/>
-						<div className="bar-container">
-							<FontAwesomeIcon icon={faThumbsUp} size="2x" className="like" />
-							{"(5)"}
-							<span className="separator" />
-							<FontAwesomeIcon icon={faHeart} size="2x" className="favorite" />
-						</div>
-					</div>
-					<div className="insta-wall-item">
-						<img
-							className="image-container"
-							alt=""
-							src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTx2I-MH7Ncxsp7ivUhvB7t5gZ5jRtX-zL_5xbHH9UCFybMTOktQA"
-						/>
-						<div className="bar-container">
-							<FontAwesomeIcon icon={faThumbsUp} size="2x" className="like" />
-							{"(5)"}
-							<span className="separator" />
-							<FontAwesomeIcon icon={faHeart} size="2x" className="favorite selected" />
-						</div>
-					</div>
-					<div className="insta-wall-item">
-						<img
-							className="image-container"
-							alt=""
-							src="https://media-cdn.tripadvisor.com/media/photo-s/09/92/73/8a/mini-zoo.jpg"
-						/>
-						<div className="bar-container">
-							<FontAwesomeIcon icon={faThumbsUp} size="2x" className="like" />
-							{"(5)"}
-							<span className="separator" />
-							<FontAwesomeIcon icon={faHeart} size="2x" className="favorite" />
-						</div>
-					</div>
-					<div className="insta-wall-item">
-						<img
-							className="image-container"
-							alt=""
-							src="http://krontour.ro/wp-content/gallery/club-turan-prince-world-5/2.jpg"
-						/>
-						<div className="bar-container">
-							<FontAwesomeIcon icon={faThumbsUp} size="2x" className="like" />
-							{"(5)"}
-							<span className="separator" />
-							<FontAwesomeIcon icon={faHeart} size="2x" className="favorite selected" />
-						</div>
-					</div>
+					{this.renderItems()}
 				</div>
 			</div>
 		);
