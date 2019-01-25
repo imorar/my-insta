@@ -8,7 +8,7 @@
   margin: 20px;
 }
 
-.insta-wall .insta-wall-item .image-container {
+.insta-wall .insta-wall-item .image-container img {
   height: 200px;
 }
 
@@ -30,7 +30,7 @@
 }
 
 .insta-wall .insta-wall-item .bar-container .like:hover {
-  color: #5fd3ff
+  color: #5fd3ff;
 }
 
 .insta-wall .insta-wall-item .bar-container .favorite.selected {
@@ -41,3 +41,16 @@
   color: #ff599c;
 }
 
+.delete {
+  margin: 5px;
+  color: transparent;
+  position: absolute;
+}
+
+.image-container:hover .delete {
+  color: #333;
+}
+
+.image-container:hover .delete:hover {
+  color: #8f8f8f;
+}

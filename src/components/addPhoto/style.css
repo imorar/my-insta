@@ -1,0 +1,30 @@
+.insta-action input {
+  padding: 10px;
+  border-radius: 4px;
+  outline: none;
+  border: 1px solid #ddd;
+}
+
+.insta-action input:focus {
+  border: 1px solid #5fd3ff;
+}
+
+.form-item {
+  font-weight: 600;
+  display: inline-block;
+  margin: 0 10px;
+}
+
+label {
+  display: block;
+  padding-bottom: 5px;
+  text-align: left;
+}
+
+p {
+  padding: 10px;
+}
+
+.error {
+  color: red;
+}

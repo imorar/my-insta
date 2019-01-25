@@ -5,6 +5,9 @@ import { FilterType } from '../../config';
 import FilterBar from '../filterBar';
 import InstaWall from '../instaWall';
 import { getAll } from '../../services/InstaService';
+import AddPhoto from "../addPhoto";
+import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class MainPage extends React.Component {
 	constructor(props){
@@ -13,7 +16,8 @@ export default class MainPage extends React.Component {
 		this.state = {
 			photos: [],
 			filterType: FilterType.All,
-			needToReload: false
+			needToReload: false,
+			showAddArea: false
 		}
 	}
 
@@ -40,7 +44,6 @@ export default class MainPage extends React.Component {
 	}
 
 	getWallContent = () => {
-		let result;
 		switch(this.state.filterType){
 			default:
 			case FilterType.All:
@@ -48,21 +51,32 @@ export default class MainPage extends React.Component {
 			case FilterType.Favorites:
 				return this.state.photos.filter(item => item.isFavorite).slice();
 		}
-
-		return result;
 	}
 
 	reloadData = () => {
-		this.setState({needToReload: true});
+		this.setState({needToReload: true, showAddArea: false});
+	}
+
+	renderAddForm = () => {
+		if(this.state.showAddArea)
+			return <AddPhoto refresh={this.reloadData} />
 	}
 
 	render() {
 		return (
 			<div className="App">
+				
 				<header className="App-header">
 					<img src={logo} className="App-logo" alt="logo" />
 					<h1>MyInsta</h1>
 				</header>
+				<div className="insta-add-container">
+					<div onClick={() => this.setState({showAddArea: !this.state.showAddArea})}>
+						<FontAwesomeIcon icon={faPlusSquare} size="2x" />
+					</div>
+					{this.renderAddForm()}
+				</div>
+				
 				<FilterBar favoriteCounter={this.getFavoritesCounter()} handleFilters={this.onFilterChange} selected={this.state.filterType} />
 				<InstaWall content={this.getWallContent()} reloadData={this.reloadData}/>
 			</div>
